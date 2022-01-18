@@ -18,6 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Edit_Task"
+            android:theme="@style/Theme.Transparent">
+        </activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".DelTask"
+            android:theme="@style/Theme.Transparent"></activity>
+        <activity android:name=".Add_Topic"
+            android:theme="@style/Theme.Transparent"></activity>
     </application>
 
 </manifest>
