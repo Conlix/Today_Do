@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimary"
-        app:tabTextColor="@color/signature"/>
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/colorAccent" />
 
     <Button
         android:id="@+id/setting"
@@ -51,5 +52,6 @@
         android:layout_marginBottom="10dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/viewpager"
-        app:layout_constraintEnd_toEndOf="@id/viewpager" />
+        app:layout_constraintEnd_toEndOf="@id/viewpager"
+        app:backgroundTint="@color/colorAccent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
