@@ -16,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/colorPrimary"
         app:tabTextColor="@color/white"
-        app:tabIndicatorColor="@color/colorAccent" />
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabSelectedTextColor="@color/signature"/>
 
     <Button
         android:id="@+id/setting"

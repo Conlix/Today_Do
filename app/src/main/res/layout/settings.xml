@@ -6,6 +6,17 @@
     android:orientation="vertical"
     android:background="@color/background">
 
+    <ListView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/b_return"
+        app:layout_constraintEnd_toEndOf="@id/b_add_topic"
+        app:layout_constraintStart_toStartOf="@id/b_cancel"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:background="@color/colorPrimary"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"/>
     <TextView
         android:id="@+id/header"
         android:layout_width="0dp"
@@ -21,63 +32,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Topics:"
+        android:textColor="@color/signature"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintLeft_toLeftOf="@id/background"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/listview_topics"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@+id/b_return"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/editText"
+        app:layout_constraintLeft_toLeftOf="@id/background"
+        app:layout_constraintRight_toRightOf="@id/background"
+        app:layout_constraintBottom_toTopOf="@id/today"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <Switch
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:text="Today Tab:  "
+        android:textColor="@color/signature"
+        android:textSize="20sp"
 
-            <TextView
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Topics:"
-                android:textColor="@color/signature"
-                android:textSize="20sp" />
-
-            <ListView
-                android:id="@+id/listview_topics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-
-                android:background="@color/colorPrimary" >
-
-
-            </ListView>
-            <Switch
-                android:id="@+id/today"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="1"
-                android:text="Today Tab:  "
-                android:textColor="@color/signature"
-                android:textSize="20sp"/>
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintLeft_toLeftOf="@id/background"
+        app:layout_constraintBottom_toBottomOf="@id/background"/>
 
 
 
