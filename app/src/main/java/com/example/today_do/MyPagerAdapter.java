@@ -55,7 +55,15 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         return POSITION_NONE;
     }
 
-    public void changeToday(Boolean today, String topic, int id) {
-        fragments.get(topic).changeToday(today,id);
+    public void changeToday(Boolean today, String topic, Task task) {
+        Log.e("PageAdapter",task.getId()+"");
+        fragments.get(topic).changeToday(today,task.getId());
+        if(mtopics.get(mtopics.size()-1)=="Today"){
+            if(today){
+                fragments.get("Today").add_Task(task);
+            }else {
+                fragments.get("Today").del_Task(task.getId());
+            }
+        }
     }
 }

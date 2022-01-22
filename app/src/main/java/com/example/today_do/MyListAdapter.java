@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.Switch;
@@ -71,11 +72,11 @@ public class MyListAdapter extends ArrayAdapter<Task> {
         date.setText(sdate.substring(2,4)+"."+sdate.substring(4,6));
         time.setText((int)((time_date%10000-time_date%100)/100)+":"+(int)(time_date%100));
 
-        today.setOnClickListener(new View.OnClickListener() {
+        today.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                Log.e("MyListAdapter",today.isChecked()+"");
-                ((MainActivity)getContext()).changeToday(today.isChecked(),getItem(position).getId());
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.e("MyListAdapter",b+"");
+                ((MainActivity)getContext()).changeToday(b,getItem(position));
             }
         });
         preview.setOnClickListener(new View.OnClickListener() {

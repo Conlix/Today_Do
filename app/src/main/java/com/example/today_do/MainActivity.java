@@ -223,8 +223,8 @@ public class MainActivity extends AppCompatActivity {
         return 2112121452;
     }
 
-    public void changeToday(Boolean today, int id){
+    public void changeToday(Boolean today, Task task){
 
-        myPagerAdapter.changeToday(today,topics.get(tabbar.getSelectedTabPosition()),id);
+        myPagerAdapter.changeToday(today,topics.get(tabbar.getSelectedTabPosition()),task);
     }
 }
