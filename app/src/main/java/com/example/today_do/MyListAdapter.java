@@ -69,7 +69,7 @@ public class MyListAdapter extends ArrayAdapter<Task> {
         String sdate = ""+Math.round(time_date/10000);
         String stime = "0"+time_date%10000;
         Log.e("ListAdapter","TimeDate: "+time_date+"stime: "+stime);
-        date.setText(sdate.substring(2,4)+"."+sdate.substring(4,6));
+        date.setText(sdate.substring(4,6)+"."+sdate.substring(2,4));
         time.setText((int)((time_date%10000-time_date%100)/100)+":"+(int)(time_date%100));
 
         today.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -89,6 +89,7 @@ public class MyListAdapter extends ArrayAdapter<Task> {
                 intent.putExtra("detalis",""+getItem(position).getDetails());
                 //intent.putExtra("creation",mobjekts.get(position).getCreations_time());
                 intent.putExtra("deadline",mobjekts.get(position).getDeadline());
+                intent.putExtra("today",mobjekts.get(position).isToday());
                 Log.e("Debug","ListAdapter Current Task: "+mobjekts.get(position).getTask()+"Current deadline: "+mobjekts.get(position).getDeadline());
 
                 ((MainActivity)getContext()).startActivityForResult(intent,REQUESTCODE_EDITTASK);

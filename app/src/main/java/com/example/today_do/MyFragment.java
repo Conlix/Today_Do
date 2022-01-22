@@ -86,7 +86,7 @@ public class MyFragment extends Fragment {
                  */
                 c_task.setTask(task.getTask());
                 c_task.setDetails(task.getDetails());
-                c_task.setDetails(task.getDetails());
+                c_task.setDeadline(task.getDeadline());
                 c_task.setToday(task.isToday());
                 break;
             }

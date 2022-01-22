@@ -19,7 +19,7 @@ import java.util.Calendar;
 public class Edit_Task extends Activity {
     String topic, s_task, s_details;
     double deadline, creration;
-
+    boolean today = false;
     int id;
 
     TextView task, details, date, time;
@@ -49,6 +49,7 @@ public class Edit_Task extends Activity {
             s_task = intent.getStringExtra("task");
             s_details = intent.getStringExtra("detalis");
             deadline = intent.getDoubleExtra("deadline",-1);
+            today = intent.getBooleanExtra("today",false);
             Log.e("Debug","Current deadluine: "+deadline);
             //Fill xml
             task.setText(s_task);
@@ -130,7 +131,7 @@ public class Edit_Task extends Activity {
                 result.putExtra("creation",creration);
                 result.putExtra("deadline",deadline);
                 result.putExtra("topic",""+topic);
-                result.putExtra("today",false);
+                result.putExtra("today",today);
 
                 setResult(RESULT_OK,result);
                 finish();

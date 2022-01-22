@@ -130,8 +130,9 @@ public class MainActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK){
                     Log.e("Main","EditTask");
                     String position = data.getStringExtra("topic");
+                    Boolean today = data.getBooleanExtra("today",false);
                     if (position == null){ break; }
-                    Task task = new Task(data.getIntExtra("id",-1),position,data.getStringExtra("Task"),data.getStringExtra("Details"),currenttime(),data.getDoubleExtra("deadline",1000000000),data.getBooleanExtra("today",false));
+                    Task task = new Task(data.getIntExtra("id",-1),position,data.getStringExtra("Task"),data.getStringExtra("Details"),data.getDoubleExtra("creation",1000000000),data.getDoubleExtra("deadline",1000000000),today);
                     myPagerAdapter.edit_Task(task,position);
                 }
                 break;
