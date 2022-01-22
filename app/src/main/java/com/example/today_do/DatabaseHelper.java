@@ -68,7 +68,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void editTask(Task task){
         Log.e("DatabaseHelpter","editTask name: "+name+" id: "+task.getId()+" task: "+task.getTask()+" details: "+ task.getDetails() +" deadline: "+task.getDeadline());
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        String queryString = "UPDATE '"+ name+"' SET "+ TASK +" = '"+task.getTask()+"', "+DETAILS+" = '"+task.getDetails()+"', "+ DEADLINE+" = "+ task.getDeadline()+ " WHERE "+ ID+ " = "+ task.getId();
+        int today = 0;
+        if(task.isToday()){ today = 1; }
+        String queryString = "UPDATE '"+ name+"' SET "+ TASK +" = '"+task.getTask()+"', "+TODAY+" = "+today+", "+DETAILS+" = '"+task.getDetails()+"', "+ DEADLINE+" = "+ task.getDeadline()+ " WHERE "+ ID+ " = "+ task.getId();
         sqLiteDatabase.execSQL(queryString);
     }
 

@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -219,5 +221,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private double currenttime(){ //Current time #yymmddhhmm
         return 2112121452;
+    }
+
+    public void changeToday(Boolean today, int id){
+
+        myPagerAdapter.changeToday(today,topics.get(tabbar.getSelectedTabPosition()),id);
     }
 }

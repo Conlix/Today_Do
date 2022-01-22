@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class MyListAdapter extends ArrayAdapter<Task> {
 
     TextView task, details, date, time;
     LinearLayout deadline, preview;
+    Switch today;
 
     public MyListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Task> objects) {
         super(context, resource, objects);
@@ -50,9 +52,11 @@ public class MyListAdapter extends ArrayAdapter<Task> {
         date = convertView.findViewById(R.id.date);
         time = convertView.findViewById(R.id.time);
         preview = convertView.findViewById(R.id.preview);
+        today = convertView.findViewById(R.id.today);
 
         //Fill View
         task.setText(getItem(position).getTask());
+        today.setChecked(getItem(position).isToday());
         //  Cep details at 25 characters
         if (getItem(position).getDetails().length() >= 25){
             details.setText(getItem(position).getDetails().substring(0,25)+"...");
@@ -67,6 +71,13 @@ public class MyListAdapter extends ArrayAdapter<Task> {
         date.setText(sdate.substring(2,4)+"."+sdate.substring(4,6));
         time.setText((int)((time_date%10000-time_date%100)/100)+":"+(int)(time_date%100));
 
+        today.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("MyListAdapter",today.isChecked()+"");
+                ((MainActivity)getContext()).changeToday(today.isChecked(),getItem(position).getId());
+            }
+        });
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

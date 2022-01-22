@@ -54,4 +54,8 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
+
+    public void changeToday(Boolean today, String topic, int id) {
+        fragments.get(topic).changeToday(today,id);
+    }
 }

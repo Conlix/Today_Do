@@ -109,4 +109,13 @@ public class MyFragment extends Fragment {
 
     public String getTopic(){
         return topic;}
+
+    public void changeToday(Boolean today, int id) {
+        for (Task task : tasks){
+            if(task.getId() == id){
+                task.setToday(today);
+                databaseHelper.editTask(task);
+            }
+        }
+    }
 }
