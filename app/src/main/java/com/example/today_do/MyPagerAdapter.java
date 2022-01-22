@@ -47,22 +47,34 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         fragments.get(topic).edit_Task(task);
     }
 
-    public void delete_Task(int id, String topic){
+    public void delete_Task(int id, String topic,Boolean today){
         fragments.get(topic).del_Task(id);
+        if (today){
+            //Delete Task in original Fragment
+            fragments.get("Today").del_Task(id);
+        }
     }
     @Override
     public int getItemPosition(Object object) {
         return POSITION_NONE;
     }
 
-    public void changeToday(Boolean today, String topic, Task task) {
+    public void changeToday(String topic, Task task) {
         Log.e("PageAdapter",task.getId()+"");
-        fragments.get(topic).changeToday(today,task.getId());
+        //Change the today Value
+        fragments.get(topic).edit_Task(task);
+        //Add or Remove the Task to Today Tab and remove today Value on original Tab
         if(mtopics.get(mtopics.size()-1)=="Today"){
-            if(today){
-                fragments.get("Today").add_Task(task);
-            }else {
+            if(topic == "Today"){
                 fragments.get("Today").del_Task(task.getId());
+                task.setToday(false);
+                fragments.get(task.getTopic()).edit_Task(task);
+            }else{
+                if(task.isToday()){
+                    fragments.get("Today").add_Task(task);
+                }else {
+                    fragments.get("Today").del_Task(task.getId());
+                }
             }
         }
     }

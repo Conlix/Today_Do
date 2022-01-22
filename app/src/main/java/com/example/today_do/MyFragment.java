@@ -79,8 +79,15 @@ public class MyFragment extends Fragment {
             Log.e("Fragment","curser id: "+c_task.getId());
             if (c_task.getId() == task.getId()){
                 //Task d_task = c_task;
+                /*
                 tasks.remove(c_task);
                 tasks.add(task);
+
+                 */
+                c_task.setTask(task.getTask());
+                c_task.setDetails(task.getDetails());
+                c_task.setDetails(task.getDetails());
+                c_task.setToday(task.isToday());
                 break;
             }
         }

@@ -99,6 +99,7 @@ public class MyListAdapter extends ArrayAdapter<Task> {
             public void onClick(View v) {
                 Intent intent = new Intent(mcontext, DelTask.class);
                 intent.putExtra("position",mobjekts.get(position).getTopic());
+                intent.putExtra("today",mobjekts.get(position).isToday());
                 intent.putExtra("task",""+task.getText());
                 intent.putExtra("id",mobjekts.get(position).getId());
                 //Log.e("LisAdapter", mobjekts.get(position).getId()+"");

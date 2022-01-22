@@ -12,7 +12,8 @@ import androidx.annotation.Nullable;
 
 public class DelTask extends Activity {
     int id;
-    String s_task, s_positoin;
+    String s_task, s_position;
+    boolean today;
 
     TextView task;
     Button abort, delete;
@@ -22,10 +23,11 @@ public class DelTask extends Activity {
         setContentView(R.layout.del_task);
 
         Intent intent = getIntent();
-        s_positoin = intent.getStringExtra("position");
+        s_position = intent.getStringExtra("position");
+        today = intent.getBooleanExtra("today",false);
         s_task = intent.getStringExtra("task");
         id = intent.getIntExtra("id",-1);
-        Log.e("Debug","DelTask restltcode: " + s_positoin+" : "+id);
+        Log.e("Debug","DelTask restltcode: " + s_position +" : "+id);
 
         //Connect to xml
         task = findViewById(R.id.task);
@@ -44,7 +46,8 @@ public class DelTask extends Activity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                result.putExtra("position",s_positoin);
+                result.putExtra("position", s_position);
+                result.putExtra("today", today);
                 result.putExtra("id",id);
                 setResult(RESULT_OK,result);
                 finish();

@@ -138,10 +138,11 @@ public class MainActivity extends AppCompatActivity {
             case REQUESTCODE_DELETETASK:
                 if (resultCode == RESULT_OK){
                     String position = data.getStringExtra("position");
+                    boolean today = data.getBooleanExtra("today",false);
                     int id = data.getIntExtra("id",-1);
                     Log.e("Debug","MainActivity restltcode: " + position+" : "+id);
                     if (id == -1){break;}
-                    myPagerAdapter.delete_Task(id,position);
+                    myPagerAdapter.delete_Task(id,position,today);
                 }
                 break;
             case REQUESTCODE_SETTINGS:
@@ -224,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeToday(Boolean today, Task task){
-
-        myPagerAdapter.changeToday(today,topics.get(tabbar.getSelectedTabPosition()),task);
+        task.setToday(today);
+        myPagerAdapter.changeToday(topics.get(tabbar.getSelectedTabPosition()),task);
     }
 }
