@@ -91,7 +91,6 @@ public class MyListAdapter extends ArrayAdapter<Task> {
                 intent.putExtra("deadline",mobjekts.get(position).getDeadline());
                 intent.putExtra("today",mobjekts.get(position).isToday());
                 Log.e("Debug","ListAdapter Current Task: "+mobjekts.get(position).getTask()+"Current deadline: "+mobjekts.get(position).getDeadline());
-
                 ((MainActivity)getContext()).startActivityForResult(intent,REQUESTCODE_EDITTASK);
             }
         });
