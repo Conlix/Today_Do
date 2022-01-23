@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         for(Map.Entry<String,?> entry : allEntries.entrySet()){
             if (entry.getKey().contains("topic")){
                 //Log.e("Debug","MainActivity Loading Topics: "+Integer.parseInt(entry.getKey().charAt(entry.getKey().length()-1)+"")+" : "+entry.getValue()+"");
-                topics.put(Integer.parseInt(entry.getKey().charAt(entry.getKey().length()-1)+""),entry.getValue()+"");
+                topics.put(Integer.parseInt(entry.getKey().charAt(entry.getKey().length()-1)+"")+1,entry.getValue()+"");
             }else{
                 if (entry.getKey().contains("highest_id")) {
                     Log.e("Debug","Load highest id: "+entry.getValue());
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("Main","Loading Today "+""+entry.getValue());
                 if((""+entry.getValue()).equals("True")){
                     Log.e("Main","Loading Today "+""+entry.getValue());
-                    topics.put(topics.size(),"Today");
+                    topics.put(0,"Today");
                 }
             }
             //Get if Today ist checked
