@@ -31,7 +31,7 @@
             android:layout_marginTop="10dp"
             android:ems="10"
             android:hint="Detalis..."
-            android:inputType="textPersonName" />
+            android:inputType="textMultiLine" />
 
         <LinearLayout
             android:layout_width="match_parent"

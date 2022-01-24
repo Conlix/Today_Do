@@ -64,7 +64,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
         //Change the today Value
         fragments.get(topic).edit_Task(task);
         //Add or Remove the Task to Today Tab and remove today Value on original Tab
-        if(mtopics.get(mtopics.size()-1)=="Today"){
+        if(mtopics.get(0)=="Today"){
             if(topic == "Today"){
                 fragments.get("Today").del_Task(task.getId());
                 task.setToday(false);
