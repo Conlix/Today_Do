@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Map<String, ?> allEntries = sp.getAll();
         //topics.put(topics.size(),"Today");
+        boolean today = false;
         for(Map.Entry<String,?> entry : allEntries.entrySet()){
             if (entry.getKey().contains("topic")){
-                //Log.e("Debug","MainActivity Loading Topics: "+Integer.parseInt(entry.getKey().charAt(entry.getKey().length()-1)+"")+" : "+entry.getValue()+"");
                 topics.put(Integer.parseInt(entry.getKey().charAt(entry.getKey().length()-1)+"")+1,entry.getValue()+"");
+                Log.d("StartUp","topic "+entry.getValue());
             }else{
                 if (entry.getKey().contains("highest_id")) {
-                    Log.e("Debug","Load highest id: "+entry.getValue());
                     highest_id = Integer.parseInt(entry.getValue()+"");
                 }
             }
@@ -68,9 +68,19 @@ public class MainActivity extends AppCompatActivity {
                 if((""+entry.getValue()).equals("True")){
                     Log.e("Main","Loading Today "+""+entry.getValue());
                     topics.put(0,"Today");
+                    today = true;
+                }else{
+                    today = false;
                 }
             }
-            //Get if Today ist checked
+        }
+        //Get if Today ist checked Reorder Topics
+        if(!today){
+            for(int i = 0; i < topics.size();i++){
+                topics.put(i,topics.get(i+1));
+                Log.e("Statup","i: "+i);
+            }
+            topics.remove(topics.size()-1);
         }
 
         Log.e("Main","Topics: "+topics);
