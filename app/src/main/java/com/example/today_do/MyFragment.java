@@ -36,8 +36,6 @@ public class MyFragment extends Fragment {
         tasks = databaseHelper.getAllTasks();
 
         myListAdapter = new MyListAdapter(mcontext,R.layout.tasks_row,tasks);
-        listAdapter = new ArrayAdapter<String>(mcontext,android.R.layout.simple_list_item_1,test);
-        test.add("tesdfsd");
     }
 
     @Override

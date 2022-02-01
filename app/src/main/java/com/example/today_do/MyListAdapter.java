@@ -2,14 +2,12 @@ package com.example.today_do;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MyListAdapter extends ArrayAdapter<Task> {
     Context mcontext;
@@ -64,7 +61,7 @@ public class MyListAdapter extends ArrayAdapter<Task> {
         //  Split deadline int to time and date
         double time_date = getItem(position).deadline;
         String sdate = ""+Math.round(time_date/10000);
-        String stime = "0"+time_date%10000;
+        //String stime = "0"+time_date%10000;
         date.setText(sdate.substring(4,6)+"."+sdate.substring(2,4));
         time.setText((int)((time_date%10000-time_date%100)/100)+":"+(int)(time_date%100));
 
