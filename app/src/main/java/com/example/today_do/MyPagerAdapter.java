@@ -19,14 +19,12 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     public MyPagerAdapter(FragmentManager fm, HashMap<Integer, String> topics, Context context) {
         super(fm);
         this.mtopics = topics;
-        //Log.e("Debug","PageAdapter Topics: " +topics.get(0)+" length of topics: "+topics.size());
         mcontext = context;
 
         //Create Fragments
         fragments.clear();
         for (String topic : mtopics.values()){
             fragments.put(topic,new MyFragment(mcontext,topic));
-            Log.e("Debug","PageAdapter Create Fragment: " +topic+" length of fragments: "+fragments.size());
         }
     }
 
@@ -60,7 +58,6 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void changeToday(String topic, Task task) {
-        Log.e("PageAdapter",task.getId()+"");
         //Change the today Value
         fragments.get(topic).edit_Task(task);
         //Add or Remove the Task to Today Tab and remove today Value on original Tab

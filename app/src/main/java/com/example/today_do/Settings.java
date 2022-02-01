@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,8 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class Settings extends Activity {
     ListView listView_topics;
@@ -29,13 +26,6 @@ public class Settings extends Activity {
     ArrayList<String> topics = new ArrayList<>();
 
     ArrayAdapter<String> arrayAdapter;
-/*
-    public Settings(HashMap<Integer,String> topics){
-        for(int i = 0; i < topics.size(); i++){
-            this.topics.add(topics.get(i));
-        }
-    }
- */
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -57,10 +47,7 @@ public class Settings extends Activity {
                 text.setTextColor(Color.WHITE);
                 return view;
             }
-
-
         };
-
 
         listView_topics.setAdapter(arrayAdapter);
 
@@ -87,8 +74,6 @@ public class Settings extends Activity {
             @Override
             public void onClick(View v) {
                 //Check if Already Exists
-                //topics.add("Today");
-                //arrayAdapter.notifyDataSetChanged();
                 Intent intent = new Intent(Settings.this, Add_Topic.class);
                 //intent.putExtra("topic","");
                 startActivityForResult(intent,3);
@@ -99,11 +84,9 @@ public class Settings extends Activity {
             @Override
             public void onClick(View v) {
                 Intent result = new Intent();
-                //Log.e("Debug","Settings topic 0: " + topics.get(0));
                 result.putExtra("lenghtof_topics",Integer.parseInt(topics.size()+""));
                 for (int i = 0; i < topics.size();i++){
                     result.putExtra("topic_"+i,topics.get(i)+"");
-                    //Log.e("Debug","Settings topic_"+i+": " + topics.get(i));
                 }
                 result.putExtra("today",s_today.isChecked());
                 setResult(RESULT_OK,result);

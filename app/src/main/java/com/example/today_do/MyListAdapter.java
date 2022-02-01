@@ -33,7 +33,6 @@ public class MyListAdapter extends ArrayAdapter<Task> {
 
     public MyListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Task> objects) {
         super(context, resource, objects);
-        //Log.e("Debug","ListAdapter Createt length of objekts: "+objects.size());
         this.mcontext = context;
         this.mrecource = resource;
         this.mobjekts = objects;
@@ -44,8 +43,6 @@ public class MyListAdapter extends ArrayAdapter<Task> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent){
         LayoutInflater layoutInflater = LayoutInflater.from(mcontext);
         convertView = layoutInflater.inflate(mrecource,parent,false);
-
-        //Log.e("Debug","ListAdapter Task: "+getItem(position).getTask());
 
         task = convertView.findViewById(R.id.task);
         details = convertView.findViewById(R.id.details);
@@ -68,17 +65,16 @@ public class MyListAdapter extends ArrayAdapter<Task> {
         double time_date = getItem(position).deadline;
         String sdate = ""+Math.round(time_date/10000);
         String stime = "0"+time_date%10000;
-        Log.e("ListAdapter","TimeDate: "+time_date+"stime: "+stime);
         date.setText(sdate.substring(4,6)+"."+sdate.substring(2,4));
         time.setText((int)((time_date%10000-time_date%100)/100)+":"+(int)(time_date%100));
 
         today.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                Log.e("MyListAdapter",b+"");
                 ((MainActivity)getContext()).changeToday(b,getItem(position));
             }
         });
+
         preview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,13 +83,12 @@ public class MyListAdapter extends ArrayAdapter<Task> {
                 intent.putExtra("topic",mobjekts.get(position).getTopic());
                 intent.putExtra("task",mobjekts.get(position).getTask());
                 intent.putExtra("detalis",""+getItem(position).getDetails());
-                //intent.putExtra("creation",mobjekts.get(position).getCreations_time());
                 intent.putExtra("deadline",mobjekts.get(position).getDeadline());
                 intent.putExtra("today",mobjekts.get(position).isToday());
-                Log.e("Debug","ListAdapter Current Task: "+mobjekts.get(position).getTask()+"Current deadline: "+mobjekts.get(position).getDeadline());
                 ((MainActivity)getContext()).startActivityForResult(intent,REQUESTCODE_EDITTASK);
             }
         });
+
         deadline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +97,6 @@ public class MyListAdapter extends ArrayAdapter<Task> {
                 intent.putExtra("today",mobjekts.get(position).isToday());
                 intent.putExtra("task",""+task.getText());
                 intent.putExtra("id",mobjekts.get(position).getId());
-                //Log.e("LisAdapter", mobjekts.get(position).getId()+"");
                 ((MainActivity)getContext()).startActivityForResult(intent,REQUESTCODE_DELETETASK);
             }
         });

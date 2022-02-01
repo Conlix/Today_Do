@@ -3,7 +3,6 @@ package com.example.today_do;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ public class DelTask extends Activity {
         today = intent.getBooleanExtra("today",false);
         s_task = intent.getStringExtra("task");
         id = intent.getIntExtra("id",-1);
-        Log.e("Debug","DelTask restltcode: " + s_position +" : "+id);
 
         //Connect to xml
         task = findViewById(R.id.task);
@@ -35,6 +33,7 @@ public class DelTask extends Activity {
         delete = findViewById(R.id.delete);
 
         final Intent result = new Intent();
+
         //onClickListeners
         abort.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +42,7 @@ public class DelTask extends Activity {
                 finish();
             }
         });
+
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

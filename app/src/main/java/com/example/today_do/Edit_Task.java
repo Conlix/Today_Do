@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -44,19 +43,16 @@ public class Edit_Task extends Activity {
 
         //If Task already exists
         id = intent.getIntExtra("id",-1);
-        Log.e("Edit_Task","id: "+id);
         if (id != -1){
             s_task = intent.getStringExtra("task");
             s_details = intent.getStringExtra("detalis");
             deadline = intent.getDoubleExtra("deadline",-1);
             today = intent.getBooleanExtra("today",false);
-            Log.e("Debug","Current deadluine: "+deadline);
             //Fill xml
             task.setText(s_task);
             details.setText(s_details);
         }else{
             //Create current time & day
-            Log.e("Edit_Task","New Creatrion");
             final Calendar cal = Calendar.getInstance();
             double year = cal.get(Calendar.YEAR)-2000;
             double month = cal.get(Calendar.MONTH)+1;
@@ -68,22 +64,17 @@ public class Edit_Task extends Activity {
             final int minute = c.get(Calendar.MINUTE);
 
             //Create string of current date & time
-            Log.e("Edit_Task","Minute: "+minute);
             creration = year*100000000 + month*1000000 + day*10000 + hour*100 + minute;
             deadline = creration;
-            Log.e("Edit_Task","Creation_date_time: "+ creration);
         }
         date.setText((int)(deadline / 10000-(int)(deadline / 1000000)*100)+"."+(int)(deadline / 1000000-(int)(deadline / 100000000)*100)+".20"+(int)(deadline / 100000000));
         time.setText((int)(deadline / 100-(int)(deadline / 10000)*100)+":"+(int)(deadline%100));
-
 
         final int year = (int)(2000+(int)(deadline / 100000000));
         final int month = (int)(deadline/1000000)-(int)(deadline / 100000000)*100;
         final int day = (int)(deadline/10000)-(int)(deadline/1000000)*100;
 
-
         result = new Intent();
-        Log.e("Edit_Task", "Year: "+year + " month: "+month+" day: "+day);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,9 +83,7 @@ public class Edit_Task extends Activity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
                                 date.setText(dayOfMonth + "." + (monthOfYear+1) + "." + year);
-                                Log.e("Debug","New Year: "+(2000+((int)(deadline/100000000)))+" : "+year+" Month: "+(monthOfYear+1)+" Day: "+dayOfMonth);
                                 deadline = (double)(year%100)* 100000000 + (double)(monthOfYear+1)*1000000 +(dayOfMonth)*10000 + deadline%10000;
-                                Log.e("Debug","New Deadline: "+deadline);
                             }
                         }, year, month-1, day);
                 datePickerDialog.show();
@@ -124,7 +113,6 @@ public class Edit_Task extends Activity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("Debug","Edit_Task: "+task.getText());
                 result.putExtra("id",id);
                 result.putExtra("Task",""+task.getText());
                 result.putExtra("Details",""+details.getText());

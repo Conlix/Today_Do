@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,7 +23,6 @@ public class Add_Topic extends Activity {
         abort = findViewById(R.id.abort);
         add = findViewById(R.id.add);
 
-
         //Set onClickListeners
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,9 +35,9 @@ public class Add_Topic extends Activity {
                 result.putExtra("topic",topic.getText()+"");
                 setResult(RESULT_OK,result);
                 finish();
-
             }
         });
+
         abort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

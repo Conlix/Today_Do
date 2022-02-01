@@ -9,10 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,21 +50,17 @@ public class MainActivity extends AppCompatActivity {
         //Load setup data
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         Map<String, ?> allEntries = sp.getAll();
-        //topics.put(topics.size(),"Today");
         boolean today = false;
         for(Map.Entry<String,?> entry : allEntries.entrySet()){
             if (entry.getKey().contains("topic")){
                 topics.put(Integer.parseInt(entry.getKey().charAt(entry.getKey().length()-1)+"")+1,entry.getValue()+"");
-                Log.d("StartUp","topic "+entry.getValue());
             }else{
                 if (entry.getKey().contains("highest_id")) {
                     highest_id = Integer.parseInt(entry.getValue()+"");
                 }
             }
             if (entry.getKey().equals("today")){
-                Log.e("Main","Loading Today "+""+entry.getValue());
                 if((""+entry.getValue()).equals("True")){
-                    Log.e("Main","Loading Today "+""+entry.getValue());
                     topics.put(0,"Today");
                     today = true;
                 }else{
@@ -78,12 +72,9 @@ public class MainActivity extends AppCompatActivity {
         if(!today){
             for(int i = 0; i < topics.size();i++){
                 topics.put(i,topics.get(i+1));
-                Log.e("Statup","i: "+i);
             }
             topics.remove(topics.size()-1);
         }
-
-        Log.e("Main","Topics: "+topics);
 
         //Setup PagerAdapter
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),topics,this);
@@ -126,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case REQUESTCODE_ADDTASK:
                 if (resultCode == RESULT_OK){
-                    Log.e("Main","AddTask");
-                    //Log.e("Debug","ActivityResult Task: "+data.getStringExtra("Task"));
                     String position = data.getStringExtra("topic");
                     if (position == null){ break; }
                     highest_id++;
@@ -138,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case REQUESTCODE_EDITTASK:
                 if (resultCode == RESULT_OK){
-                    Log.e("Main","EditTask");
                     String position = data.getStringExtra("topic");
                     Boolean today = data.getBooleanExtra("today",false);
                     if (position == null){ break; }
@@ -151,32 +139,23 @@ public class MainActivity extends AppCompatActivity {
                     String position = data.getStringExtra("position");
                     boolean today = data.getBooleanExtra("today",false);
                     int id = data.getIntExtra("id",-1);
-                    Log.e("Debug","MainActivity restltcode: " + position+" : "+id);
                     if (id == -1){break;}
                     myPagerAdapter.delete_Task(id,position,today);
                 }
                 break;
             case REQUESTCODE_SETTINGS:
-                //Log.e("Debug","MainActivity restltcode: " + RESULT_OK);
                 if (resultCode == RESULT_OK){
                     //Delete all Topics from Database and store the new ons
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = sp.edit();
                     editor.clear().commit();
 
-                    /*//Save old Topics to delete the Databases for the deletet Fragmants
-                    HashMap<Integer,String> old_topics =  new HashMap<>();
-                    old_topics = topics;
-                     */
                     topics.clear();
                     int leghtof_topics = data.getIntExtra("lenghtof_topics",-1);
-                    //Log.e("Debug","integer "+leghtof_topics);
                     for(int i = 0; i < leghtof_topics;i++){
                         topics.put(i,data.getStringExtra("topic_"+i));
-                        //Log.e("Debug","ActivityResult Working "+data.getStringExtra("topic_"+i)+" i: "+i);
                         editor.putString("topic_"+i,data.getStringExtra("topic_"+i));
                     }
-                    Log.e("Main","Restult Settings Today: "+data.getBooleanExtra("today",false));
                     if(data.getBooleanExtra("today",false)){
                         topics.put(topics.size(),"Today");
                         editor.putString("today","True");
@@ -185,27 +164,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     editor.putString("highest_id",highest_id+"");
                     editor.commit();
-                    //Log.e("Debug","ActivityResult Topics: "+data.getIntExtra("lenghtof_topics",-1)+" topics 0 " +topics.get(0));
-                    //topics.put(1,"Second");
+
                     myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager(),topics,this);
                     myPagerAdapter.notifyDataSetChanged();
                     viewPager.setAdapter(myPagerAdapter);
                     tabbar.setupWithViewPager(viewPager);
                     update_tabbar();
 
-                    /* //Delete the deletet Fragments
-                    for(String old_topic : old_topics.values()){
-                        for(String current_topic : topics.values()){
-                            if (!current_topic.equals(old_topic)){
-                                if (topics.get(topics.size()).equals(current_topic)){
-
-                                }
-                            }else{
-                                break;
-                            }
-                        }
-                    }
-                     */
                     //Reload App to Fix Fragment Bug
                     Intent reload = new Intent(MainActivity.this,MainActivity.class);
                     startActivity(reload);
@@ -229,10 +194,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("highest_id",highest_id+"");
         editor.apply();
-        Log.d("Debug","saved highest id: "+highest_id);
-    }
-    private double currenttime(){ //Current time #yymmddhhmm
-        return 2112121452;
     }
 
     public void changeToday(Boolean today, Task task){
