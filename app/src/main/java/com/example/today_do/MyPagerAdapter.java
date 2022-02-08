@@ -1,13 +1,11 @@
 package com.example.today_do;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
@@ -46,7 +44,9 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void delete_Task(int id, String topic,Boolean today){
-        fragments.get(topic).del_Task(id);
+        if(!fragments.get(topic).equals(null)){
+            fragments.get(topic).del_Task(id);
+        }
         if (today){
             //Delete Task in original Fragment
             fragments.get("Today").del_Task(id);
@@ -59,7 +59,9 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     public void changeToday(String topic, Task task) {
         //Change the today Value
-        fragments.get(topic).edit_Task(task);
+        if(!fragments.get(topic).equals(null)) {
+            fragments.get(topic).edit_Task(task);
+        }
         //Add or Remove the Task to Today Tab and remove today Value on original Tab
         if(mtopics.get(0)=="Today"){
             if(topic == "Today"){
