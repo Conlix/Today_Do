@@ -2,6 +2,7 @@ package com.example.today_do;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class MyFragment extends Fragment {
         tasks = databaseHelper.getAllTasks();
 
         myListAdapter = new MyListAdapter(mcontext,R.layout.tasks_row,tasks);
+        sort();
     }
 
     @Override
@@ -58,6 +60,7 @@ public class MyFragment extends Fragment {
         tasks.add(task);
         databaseHelper.addTask(task);
         myListAdapter.notifyDataSetChanged();
+        sort();
     }
 
     public void edit_Task(Task task){
@@ -72,6 +75,7 @@ public class MyFragment extends Fragment {
         }
         databaseHelper.editTask(task);
         myListAdapter.notifyDataSetChanged();
+        sort();
     }
 
     //Delete Task
@@ -100,5 +104,21 @@ public class MyFragment extends Fragment {
                 databaseHelper.editTask(task);
             }
         }
+    }
+
+    private void sort(){
+        int min;
+        for(int i = 0;i < tasks.size();i++){
+            min = i;
+            for(int j = i + 1;j < tasks.size();j++){
+                if(tasks.get(j).getDeadline() < tasks.get(min).getDeadline()){
+                    min = j;
+                }
+            }
+            Task temp = tasks.get(i);
+            tasks.set(i,tasks.get(min));
+            tasks.set(min,temp);
+        }
+        myListAdapter.notifyDataSetChanged();
     }
 }
