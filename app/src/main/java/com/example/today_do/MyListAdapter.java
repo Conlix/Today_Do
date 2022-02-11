@@ -97,7 +97,23 @@ public class MyListAdapter extends ArrayAdapter<Task> {
                 ((MainActivity)getContext()).startActivityForResult(intent,REQUESTCODE_DELETETASK);
             }
         });
-
+        sort();
         return convertView;
+    }
+
+    private void sort(){
+        for(int i = 0;i < mobjekts.size() - 1;i++){
+            int min = i;
+            for(int j = i + 1;j < mobjekts.size()-1;j++){
+                if(mobjekts.get(j).getDeadline() < mobjekts.get(min).getDeadline()){
+                    min = j;
+                }
+            }
+            if (i != min){
+                Task temp = mobjekts.get(i);
+                mobjekts.set(i,mobjekts.get(min));
+                mobjekts.set(min,temp);
+            }
+        }
     }
 }
