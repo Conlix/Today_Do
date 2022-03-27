@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -65,7 +66,12 @@ public class Edit_Task extends Activity {
 
             //Create string of current date & time
             creration = year*100000000 + month*1000000 + day*10000 + hour*100 + minute;
-            deadline = creration;
+            Log.e("EditTask","Hour: "+hour+" Creation: "+creration);
+            if (hour < 19){
+                deadline = year*100000000 + month*1000000 + day*10000 + 2000;
+            }else{
+                deadline = year*100000000 + month*1000000 + (day+1)*10000 + 2000;
+            }
         }
         date.setText((int)(deadline / 10000-(int)(deadline / 1000000)*100)+"."+(int)(deadline / 1000000-(int)(deadline / 100000000)*100)+".20"+(int)(deadline / 100000000));
         time.setText((int)(deadline / 100-(int)(deadline / 10000)*100)+":"+(int)(deadline%100));
