@@ -32,7 +32,8 @@ public class Add_Topic extends Activity {
                     return;
                 }
                 final Intent result = new Intent();
-                result.putExtra("topic",topic.getText()+"");
+                String s_topic = topic.getText().toString().replaceAll("\\s","_");
+                result.putExtra("topic",s_topic);
                 setResult(RESULT_OK,result);
                 finish();
             }
